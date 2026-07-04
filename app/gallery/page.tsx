@@ -3,7 +3,7 @@ import GalleryClient from '@/components/GalleryClient';
 
 export const metadata: Metadata = {
   title: 'Gallery — Auto Extreme',
-  description: 'Recent ceramic, correction, PPF and interior work from the studio.',
+  description: 'Recent corrections, coatings and interior restorations from the studio.',
 };
 
 export default function GalleryPage() {

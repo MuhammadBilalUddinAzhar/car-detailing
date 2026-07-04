@@ -8,15 +8,14 @@
 }
 
 html {
-  background: #0a0b0d;
+  scroll-behavior: smooth;
 }
 
-::selection {
-  background: #ff4d2e;
-  color: #fff;
+body {
+  @apply bg-ink text-chrome font-body antialiased;
 }
 
-/* Custom scrollbar */
+/* ── Custom scrollbar ─────────────────────────────── */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -29,51 +28,51 @@ html {
   border: 2px solid #0a0b0d;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #b8331c;
+  background: #ff4d2e;
 }
 
-/* Section reveal helper (used by <Reveal />) */
-.reveal-base {
-  opacity: 0;
-  transform: translateY(36px);
-  transition:
-    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-}
-.reveal-base.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+/* ── Selection ────────────────────────────────────── */
+::selection {
+  background: #ff4d2e;
+  color: #0a0b0d;
 }
 
-/* Image placeholder blocks (swap for next/image with real photos) */
+/* ── Utility classes ──────────────────────────────── */
 .img-placeholder {
-  background:
-    radial-gradient(120% 90% at 20% 0%, rgba(255, 77, 46, 0.16) 0%, transparent 55%),
-    linear-gradient(145deg, #1c1f24 0%, #0e1013 100%);
-  position: relative;
-  overflow: hidden;
+  @apply relative overflow-hidden rounded-2xl bg-graphite;
+  background-image:
+    radial-gradient(ellipse at 30% 20%, rgba(255, 77, 46, 0.12), transparent 60%),
+    linear-gradient(135deg, #1c1f24 0%, #121418 100%);
 }
 .img-placeholder::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(
-      to right,
-      rgba(232, 234, 237, 0.04) 1px,
-      transparent 1px
-    ),
-    linear-gradient(to bottom, rgba(232, 234, 237, 0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 14px,
+    rgba(232, 234, 237, 0.03) 14px 15px
+  );
 }
 
+.eyebrow {
+  @apply font-body text-xs font-semibold uppercase tracking-[0.28em] text-ember;
+}
+
+.focus-ring {
+  @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember;
+}
+
+/* ── Reduced motion ───────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .reveal-base {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -1,67 +1,68 @@
 'use client';
 
-import { useState } from 'react';
-import Reveal from '@/components/Reveal';
-import { gallery } from '@/lib/data';
+import { useMemo, useState } from 'react';
+import { gallery, galleryCategories } from '@/lib/data';
 
-const filters = ['All', 'Ceramic', 'Correction', 'Interior', 'PPF'] as const;
+type Category = (typeof galleryCategories)[number];
 
 export default function GalleryClient() {
-  const [active, setActive] = useState<(typeof filters)[number]>('All');
+  const [filter, setFilter] = useState<Category>('all');
 
-  const items =
-    active === 'All' ? gallery : gallery.filter((g) => g.category === active);
+  const items = useMemo(
+    () => (filter === 'all' ? gallery : gallery.filter((g) => g.category === filter)),
+    [filter],
+  );
 
   return (
-    <div className="pt-28 pb-24 bg-ink min-h-screen">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <Reveal>
-          <p className="text-ember text-xs font-bold uppercase tracking-[0.25em] mb-3">
-            Gallery
-          </p>
-          <h1 className="font-display uppercase tracking-tightest text-4xl md:text-6xl mb-10">
-            Recent work.
-          </h1>
-        </Reveal>
+    <div className="mx-auto max-w-6xl px-5 pb-28 pt-28">
+      <p className="eyebrow">Gallery</p>
+      <h1 className="mt-4 font-display text-4xl leading-tight tracking-tightest sm:text-5xl">
+        Fresh out of the <span className="text-ember">studio</span>
+      </h1>
 
-        <div className="flex flex-wrap gap-3 mb-12">
-          {filters.map((f) => (
-            <button
-              key={f}
-              onClick={() => setActive(f)}
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors border ${
-                active === f
-                  ? 'bg-ember border-ember text-white'
-                  : 'bg-transparent border-white/10 text-mist hover:text-chrome hover:border-white/25'
-              }`}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((g) => (
-            <figure
-              key={g.id}
-              className="group rounded-2xl overflow-hidden bg-carbon border border-white/5"
-            >
-              {/* Replace with next/image + your real photo (see README) */}
-              <div
-                className="img-placeholder aspect-[4/3] transition-transform duration-500 group-hover:scale-[1.03]"
-                role="img"
-                aria-label={g.title}
-              />
-              <figcaption className="p-5 flex items-center justify-between">
-                <p className="text-chrome text-sm font-semibold">{g.title}</p>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-ember bg-ember/10 border border-ember/20 rounded-full px-3 py-1">
-                  {g.category}
-                </span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+      {/* Filters */}
+      <div className="mt-10 flex flex-wrap gap-3" role="group" aria-label="Filter gallery by category">
+        {galleryCategories.map((c) => (
+          <button
+            key={c}
+            onClick={() => setFilter(c)}
+            aria-pressed={filter === c}
+            className={`focus-ring rounded-full px-5 py-2 text-sm font-medium capitalize transition-colors ${
+              filter === c
+                ? 'bg-ember text-ink'
+                : 'border border-graphite text-mist hover:border-ember hover:text-chrome'
+            }`}
+          >
+            {c}
+          </button>
+        ))}
       </div>
+
+      {/* Grid */}
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((g) => (
+          <figure key={g.id} className="group">
+            {/* Replace with next/image once real photos are in /public/images/gallery */}
+            <div className="img-placeholder aspect-[4/3] transition-transform duration-300 group-hover:scale-[1.02]">
+              <span className="absolute inset-0 flex items-center justify-center text-xs uppercase tracking-[0.25em] text-mist">
+                {g.category}
+              </span>
+            </div>
+            <figcaption className="mt-3 flex items-baseline justify-between gap-3 text-sm">
+              <span className="text-chrome">{g.title}</span>
+              <span className="shrink-0 text-xs uppercase tracking-[0.18em] text-ember">
+                {g.category}
+              </span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      {items.length === 0 && (
+        <p className="mt-16 text-center text-mist">
+          Nothing in this category yet — check back after the next batch of details.
+        </p>
+      )}
     </div>
   );
 }

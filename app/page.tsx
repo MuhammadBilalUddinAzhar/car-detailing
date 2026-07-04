@@ -1,147 +1,111 @@
 import Link from 'next/link';
 import CinematicCarHero from '@/components/CinematicCarHero';
-import Reveal from '@/components/Reveal';
-import { services, stats, process, testimonials } from '@/lib/data';
+import { services, stats, testimonials, site } from '@/lib/data';
 
 export default function HomePage() {
   return (
     <>
-      {/* Cinematic pinned scroll hero */}
+      {/* Hero MUST stay the first section — it pins to the viewport top. */}
       <CinematicCarHero />
 
-      {/* Stats strip */}
-      <section className="relative z-10 bg-ink border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8 py-14 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 100}>
-              <div className="text-center">
-                <p className="font-display text-3xl md:text-4xl text-ember tracking-tightest mb-1">
-                  {s.value}
-                </p>
-                <p className="text-mist text-xs md:text-sm uppercase tracking-wider">
-                  {s.label}
-                </p>
+      {/* Services preview */}
+      <section className="mx-auto max-w-6xl px-5 py-24">
+        <p className="eyebrow">What we do</p>
+        <div className="mt-4 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <h2 className="max-w-md font-display text-3xl tracking-tightest sm:text-4xl">
+            Six ways to make it look brand new
+          </h2>
+          <Link href="/services" className="focus-ring text-sm font-semibold text-ember hover:underline">
+            All services →
+          </Link>
+        </div>
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {services.slice(0, 6).map((s) => (
+            <Link
+              key={s.slug}
+              href={`/services#${s.slug}`}
+              className="focus-ring group rounded-2xl border border-graphite bg-carbon p-6 transition-colors hover:border-ember"
+            >
+              <div className="flex items-baseline justify-between">
+                <h3 className="font-display text-lg tracking-tightest">{s.title}</h3>
+                <span className="text-sm font-semibold text-ember">{s.price}</span>
               </div>
-            </Reveal>
+              <p className="mt-3 text-sm leading-relaxed text-mist">{s.blurb}</p>
+              <p className="mt-4 text-xs uppercase tracking-[0.2em] text-mist">
+                {s.duration} · <span className="text-chrome group-hover:text-ember">Details →</span>
+              </p>
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* Services preview */}
-      <section className="bg-ink py-24">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <Reveal>
-            <p className="text-ember text-xs font-bold uppercase tracking-[0.25em] mb-3">
-              What we do
-            </p>
-            <h2 className="font-display uppercase tracking-tightest text-3xl md:text-5xl mb-14 max-w-2xl">
-              Six ways to make your paint <span className="text-ember">unreasonable</span>
-            </h2>
-          </Reveal>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((s, i) => (
-              <Reveal key={s.slug} delay={(i % 3) * 100}>
-                <Link
-                  href={`/services#${s.slug}`}
-                  className="group block h-full rounded-2xl bg-carbon border border-white/5 p-7 transition-all duration-300 hover:border-ember/40 hover:-translate-y-1 hover:shadow-[0_20px_40px_-16px_rgba(255,77,46,0.25)]"
-                >
-                  <div className="flex items-baseline justify-between mb-4">
-                    <h3 className="text-chrome font-bold text-lg tracking-tight group-hover:text-ember transition-colors">
-                      {s.title}
-                    </h3>
-                    <span className="text-ember text-sm font-semibold whitespace-nowrap ml-3">
-                      {s.price}
-                    </span>
-                  </div>
-                  <p className="text-mist text-sm leading-relaxed mb-6">
-                    {s.blurb}
-                  </p>
-                  <span className="text-xs font-bold uppercase tracking-wider text-mist group-hover:text-chrome transition-colors">
-                    View details →
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-carbon border-y border-white/5 py-24">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <Reveal>
-            <p className="text-ember text-xs font-bold uppercase tracking-[0.25em] mb-3">
-              The process
-            </p>
-            <h2 className="font-display uppercase tracking-tightest text-3xl md:text-5xl mb-14">
-              No shortcuts. Ever.
-            </h2>
-          </Reveal>
-          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-            {process.map((p, i) => (
-              <Reveal key={p.step} delay={i * 100}>
-                <div className="relative pl-5 border-l border-ember/30">
-                  <span className="font-display text-ember/60 text-sm tracking-tightest">
-                    {p.step}
-                  </span>
-                  <h3 className="text-chrome font-bold text-lg mt-2 mb-3 tracking-tight">
-                    {p.title}
-                  </h3>
-                  <p className="text-mist text-sm leading-relaxed">{p.text}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+      {/* Stats band */}
+      <section className="border-y border-graphite bg-carbon">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-5 py-16 lg:grid-cols-4">
+          {stats.map((st) => (
+            <div key={st.label} className="text-center">
+              <p className="font-display text-4xl tracking-tightest text-ember">
+                {st.value.toLocaleString()}
+                {st.suffix}
+              </p>
+              <p className="mt-1 text-xs uppercase tracking-[0.24em] text-mist">{st.label}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="bg-ink py-24">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <Reveal>
-            <p className="text-ember text-xs font-bold uppercase tracking-[0.25em] mb-3">
-              Word of mouth
-            </p>
-            <h2 className="font-display uppercase tracking-tightest text-3xl md:text-5xl mb-14">
-              Owners talk.
-            </h2>
-          </Reveal>
-          <div className="grid gap-6 md:grid-cols-3">
-            {testimonials.map((t, i) => (
-              <Reveal key={t.name} delay={i * 100}>
-                <figure className="h-full rounded-2xl bg-carbon border border-white/5 p-7 flex flex-col">
-                  <blockquote className="text-chrome/90 text-sm leading-relaxed flex-1">
-                    “{t.quote}”
-                  </blockquote>
-                  <figcaption className="mt-6 pt-5 border-t border-white/5">
-                    <p className="text-chrome font-bold text-sm">{t.name}</p>
-                    <p className="text-mist text-xs">{t.car}</p>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
+      <section className="mx-auto max-w-6xl px-5 py-24">
+        <p className="eyebrow">Word on the street</p>
+        <h2 className="mt-4 font-display text-3xl tracking-tightest sm:text-4xl">
+          Owners who stared a little too long
+        </h2>
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          {testimonials.map((t) => (
+            <figure key={t.author} className="rounded-2xl border border-graphite bg-carbon p-7">
+              <blockquote className="text-sm leading-relaxed text-chrome">“{t.quote}”</blockquote>
+              <figcaption className="mt-5 text-sm">
+                <span className="font-semibold">{t.author}</span>
+                <span className="text-mist"> · {t.car}</span>
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="bg-carbon border-t border-white/5 py-24">
-        <div className="max-w-4xl mx-auto px-5 text-center">
-          <Reveal>
-            <h2 className="font-display uppercase tracking-tightest text-3xl md:text-5xl mb-6">
-              Ready when <span className="text-ember">you</span> are.
-            </h2>
-            <p className="text-mist text-lg mb-10 max-w-xl mx-auto">
-              Slots fill about two weeks out. Tell us about your car and we’ll
-              confirm your booking the same day.
-            </p>
+      {/* CTA */}
+      <section className="mx-auto max-w-6xl px-5 pb-28">
+        <div
+          className="rounded-3xl border border-graphite p-10 text-center sm:p-16"
+          style={{
+            background:
+              'radial-gradient(ellipse 80% 100% at 50% 120%, rgba(255,77,46,0.18), #121418 70%)',
+          }}
+        >
+          <h2 className="font-display text-3xl tracking-tightest sm:text-5xl">
+            Your car. <span className="text-ember">Day-one condition.</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-lg text-mist">
+            Message us on WhatsApp with your car and the finish you want — we reply within the hour
+            during studio time.
+          </p>
+          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href="/contact"
-              className="inline-block bg-ember hover:bg-emberdim text-white font-bold rounded-full px-10 py-4 transition-colors"
+              className="focus-ring rounded-full bg-ember px-8 py-4 font-semibold text-ink transition-transform hover:scale-105"
             >
               Book your detail
             </Link>
-          </Reveal>
+            <a
+              href={`https://wa.me/${site.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus-ring rounded-full border border-graphite px-8 py-4 font-semibold text-chrome transition-colors hover:border-ember"
+            >
+              WhatsApp us
+            </a>
+          </div>
         </div>
       </section>
     </>

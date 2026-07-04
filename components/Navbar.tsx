@@ -25,34 +25,28 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Close mobile menu on route change
   useEffect(() => setOpen(false), [pathname]);
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-[100] transition-all duration-500 ${
-        scrolled || open
-          ? 'bg-ink/80 backdrop-blur-xl border-b border-white/5'
-          : 'bg-transparent border-b border-transparent'
+      className={`fixed inset-x-0 top-0 z-[100] transition-colors duration-300 ${
+        scrolled || open ? 'bg-ink/90 backdrop-blur-md border-b border-graphite' : 'bg-transparent'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
-        <Link
-          href="/"
-          className="font-display uppercase tracking-tightest text-lg text-chrome"
-        >
-          Auto<span className="text-ember">Extreme</span>
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+        <Link href="/" className="focus-ring font-display text-lg tracking-tightest">
+          AUTO<span className="text-ember">EXTREME</span>
         </Link>
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-8">
+        {/* Desktop */}
+        <ul className="hidden items-center gap-7 md:flex">
           {links.map((l) => (
             <li key={l.href}>
               <Link
                 href={l.href}
-                className={`text-sm font-medium transition-colors ${
-                  pathname === l.href
-                    ? 'text-ember'
-                    : 'text-mist hover:text-chrome'
+                className={`focus-ring text-sm font-medium transition-colors hover:text-chrome ${
+                  pathname === l.href ? 'text-ember' : 'text-mist'
                 }`}
               >
                 {l.label}
@@ -61,8 +55,10 @@ export default function Navbar() {
           ))}
           <li>
             <a
-              href={`tel:${site.phone.replace(/[^+\d]/g, '')}`}
-              className="text-sm font-bold text-ink bg-chrome hover:bg-white rounded-full px-5 py-2 transition-colors"
+              href={`https://wa.me/${site.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus-ring rounded-full bg-ember px-4 py-2 text-sm font-semibold text-ink transition-transform hover:scale-105"
             >
               Book now
             </a>
@@ -74,34 +70,26 @@ export default function Navbar() {
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
-          className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-[5px]"
+          className="focus-ring flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
         >
           <span
-            className={`block w-6 h-[2px] bg-chrome transition-transform ${
-              open ? 'translate-y-[7px] rotate-45' : ''
-            }`}
+            className={`h-0.5 w-6 bg-chrome transition-transform ${open ? 'translate-y-2 rotate-45' : ''}`}
           />
+          <span className={`h-0.5 w-6 bg-chrome transition-opacity ${open ? 'opacity-0' : ''}`} />
           <span
-            className={`block w-6 h-[2px] bg-chrome transition-opacity ${
-              open ? 'opacity-0' : ''
-            }`}
-          />
-          <span
-            className={`block w-6 h-[2px] bg-chrome transition-transform ${
-              open ? '-translate-y-[7px] -rotate-45' : ''
-            }`}
+            className={`h-0.5 w-6 bg-chrome transition-transform ${open ? '-translate-y-2 -rotate-45' : ''}`}
           />
         </button>
       </nav>
 
       {/* Mobile menu */}
       {open && (
-        <ul className="md:hidden px-5 pb-6 pt-2 space-y-1 bg-ink/95 backdrop-blur-xl">
+        <ul className="border-t border-graphite bg-ink/95 px-5 py-4 backdrop-blur-md md:hidden">
           {links.map((l) => (
             <li key={l.href}>
               <Link
                 href={l.href}
-                className={`block py-3 text-base font-semibold border-b border-white/5 ${
+                className={`focus-ring block py-3 text-base font-medium ${
                   pathname === l.href ? 'text-ember' : 'text-chrome'
                 }`}
               >
@@ -109,10 +97,12 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
-          <li className="pt-3">
+          <li className="pt-2">
             <a
-              href={`tel:${site.phone.replace(/[^+\d]/g, '')}`}
-              className="block text-center font-bold text-ink bg-chrome rounded-full px-5 py-3"
+              href={`https://wa.me/${site.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus-ring block rounded-full bg-ember px-4 py-3 text-center font-semibold text-ink"
             >
               Book now
             </a>

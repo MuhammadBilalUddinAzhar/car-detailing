@@ -1,82 +1,84 @@
 'use client';
 
-import Link from 'next/link';
-import Reveal from '@/components/Reveal';
-import { services } from '@/lib/data';
+import { useEffect, useState } from 'react';
+import { services, site } from '@/lib/data';
 
 export default function ServicesClient() {
-  return (
-    <div className="pt-28 pb-24 bg-ink min-h-screen">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <Reveal>
-          <p className="text-ember text-xs font-bold uppercase tracking-[0.25em] mb-3">
-            Services
-          </p>
-          <h1 className="font-display uppercase tracking-tightest text-4xl md:text-6xl mb-4">
-            Pick your finish.
-          </h1>
-          <p className="text-mist text-lg max-w-2xl mb-16">
-            Every package starts with an inspection and paint depth readings —
-            prices below are honest starting points, confirmed before we begin.
-          </p>
-        </Reveal>
+  const [active, setActive] = useState<string | null>(null);
 
-        <div className="space-y-16">
-          {services.map((s, i) => (
-            <Reveal key={s.slug}>
-              <article
-                id={s.slug}
-                className="scroll-mt-24 grid gap-8 lg:grid-cols-2 items-center rounded-3xl bg-carbon border border-white/5 p-7 lg:p-10"
+  // Deep-link support: /services#ceramic-coating scrolls to & highlights the card.
+  useEffect(() => {
+    const applyHash = () => {
+      const slug = window.location.hash.replace('#', '');
+      if (!slug) return;
+      setActive(slug);
+      // Wait a frame so layout is settled before scrolling.
+      requestAnimationFrame(() => {
+        document.getElementById(slug)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    };
+    applyHash();
+    window.addEventListener('hashchange', applyHash);
+    return () => window.removeEventListener('hashchange', applyHash);
+  }, []);
+
+  return (
+    <div className="mx-auto max-w-6xl px-5 pb-28 pt-28">
+      <p className="eyebrow">Services</p>
+      <h1 className="mt-4 max-w-2xl font-display text-4xl leading-tight tracking-tightest sm:text-5xl">
+        Pick the finish. <span className="text-ember">We handle the obsession.</span>
+      </h1>
+      <p className="mt-5 max-w-xl text-mist">
+        Every package starts with a safe decontamination wash and ends with a walk-around under
+        studio lighting. Prices are starting points — final quote depends on size and condition.
+      </p>
+
+      <div className="mt-14 space-y-8">
+        {services.map((s, i) => (
+          <article
+            key={s.slug}
+            id={s.slug}
+            className={`grid scroll-mt-24 gap-8 rounded-3xl border p-7 transition-colors sm:p-10 lg:grid-cols-2 ${
+              active === s.slug ? 'border-ember bg-carbon' : 'border-graphite bg-carbon/60'
+            }`}
+          >
+            <div className={i % 2 === 1 ? 'lg:order-2' : ''}>
+              {/* Replace with next/image once real photos are in /public/images/services */}
+              <div className="img-placeholder aspect-[4/3]">
+                <span className="absolute inset-0 flex items-center justify-center text-xs uppercase tracking-[0.25em] text-mist">
+                  {s.title}
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-center">
+              <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                <h2 className="font-display text-2xl tracking-tightest">{s.title}</h2>
+                <span className="font-semibold text-ember">{s.price}</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-mist">{s.duration}</span>
+              </div>
+              <p className="mt-4 leading-relaxed text-mist">{s.blurb}</p>
+              <ul className="mt-6 space-y-2">
+                {s.includes.map((inc) => (
+                  <li key={inc} className="flex gap-3 text-sm text-chrome">
+                    <span aria-hidden className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ember" />
+                    {inc}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+                  `Hi Auto Extreme — I'd like to book the ${s.title}.`,
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring mt-8 inline-block w-fit rounded-full bg-ember px-6 py-3 text-sm font-semibold text-ink transition-transform hover:scale-105"
               >
-                <div className={i % 2 === 1 ? 'lg:order-2' : ''}>
-                  {/* Replace with next/image + your real photo (see README) */}
-                  <div
-                    className="img-placeholder rounded-2xl aspect-[4/3] flex items-end p-5"
-                    role="img"
-                    aria-label={s.title}
-                  >
-                    <span className="relative z-10 text-mist/70 text-xs uppercase tracking-wider">
-                      {s.image}
-                    </span>
-                  </div>
-                </div>
-                <div>
-                  <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-4">
-                    <h2 className="text-chrome font-bold text-2xl md:text-3xl tracking-tight">
-                      {s.title}
-                    </h2>
-                    <span className="text-ember font-bold">{s.price}</span>
-                    <span className="text-mist text-sm">· {s.duration}</span>
-                  </div>
-                  <p className="text-mist leading-relaxed mb-6">{s.blurb}</p>
-                  <ul className="space-y-2.5 mb-8">
-                    {s.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-3 text-sm text-chrome/85">
-                        <svg
-                          className="w-4 h-4 text-ember mt-0.5 shrink-0"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.5"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href={`/contact?service=${s.slug}`}
-                    className="inline-block bg-ember hover:bg-emberdim text-white font-bold rounded-full px-8 py-3 transition-colors text-sm"
-                  >
-                    Book {s.title}
-                  </Link>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+                Book {s.title}
+              </a>
+            </div>
+          </article>
+        ))}
       </div>
     </div>
   );
