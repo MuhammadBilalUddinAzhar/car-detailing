@@ -1,72 +1,85 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { aboutTimeline, site, stats } from '@/lib/data';
+import Reveal from '@/components/Reveal';
+import { process, stats } from '@/lib/data';
 
 export const metadata: Metadata = {
   title: 'About — Auto Extreme',
-  description: 'The studio, the standard and the story behind Auto Extreme.',
+  description: 'The studio, the standards and the people behind Auto Extreme.',
 };
 
 export default function AboutPage() {
   return (
-    <div className="mx-auto max-w-6xl px-5 pb-28 pt-28">
-      <p className="eyebrow">About the studio</p>
-      <h1 className="mt-4 max-w-2xl font-display text-4xl leading-tight tracking-tightest sm:text-5xl">
-        Built by people who <span className="text-ember">notice everything</span>
-      </h1>
+    <div className="pt-28 pb-24 bg-ink min-h-screen">
+      <div className="max-w-7xl mx-auto px-5 lg:px-8">
+        <Reveal>
+          <p className="text-ember text-xs font-bold uppercase tracking-[0.25em] mb-3">
+            About
+          </p>
+          <h1 className="font-display uppercase tracking-tightest text-4xl md:text-6xl mb-6 max-w-3xl">
+            Built by people who wash their own wheels twice.
+          </h1>
+          <p className="text-mist text-lg leading-relaxed max-w-2xl mb-16">
+            Auto Extreme started in a single garage bay with a paint depth
+            gauge, a rotary polisher and an unhealthy relationship with
+            cross-hatch lighting. Today it’s a dedicated studio — same
+            standards, better lighting.
+          </p>
+        </Reveal>
 
-      <div className="mt-12 grid gap-12 lg:grid-cols-[1.2fr_1fr]">
-        <div className="space-y-5 leading-relaxed text-mist">
-          <p>
-            {site.name} started in 2017 with one polisher, one pressure washer and a stubborn belief
-            that a car wash should never leave a car worse than it arrived. Nine years later the
-            studio runs four dedicated bays — wash, correction, coating and interior — under
-            colour-accurate lighting, because you can&apos;t fix what you can&apos;t see.
-          </p>
-          <p>
-            Every vehicle follows the same discipline: safe decontamination first, measured
-            correction second, protection last. Paint depth is logged before a machine ever touches
-            a panel. Coatings cure under infrared lamps, not hope. And nothing leaves the building
-            until it passes the final walk-around under 6500K light.
-          </p>
-          <p>
-            We work on daily drivers, weekend toys and full concours builds alike. The standard
-            doesn&apos;t change with the badge on the hood.
-          </p>
-          <Link
-            href="/contact"
-            className="focus-ring inline-block rounded-full bg-ember px-7 py-3.5 font-semibold text-ink transition-transform hover:scale-105"
-          >
-            Book a visit
-          </Link>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
+          {stats.map((s, i) => (
+            <Reveal key={s.label} delay={i * 100}>
+              <div className="rounded-2xl bg-carbon border border-white/5 p-6 text-center">
+                <p className="font-display text-3xl text-ember tracking-tightest mb-1">
+                  {s.value}
+                </p>
+                <p className="text-mist text-xs uppercase tracking-wider">
+                  {s.label}
+                </p>
+              </div>
+            </Reveal>
+          ))}
         </div>
 
-        {/* Timeline */}
-        <ol className="relative space-y-8 border-l border-graphite pl-8">
-          {aboutTimeline.map((t) => (
-            <li key={t.year} className="relative">
-              <span
-                aria-hidden
-                className="absolute -left-[37px] top-1.5 h-2.5 w-2.5 rounded-full bg-ember"
-              />
-              <p className="font-display text-lg tracking-tightest text-ember">{t.year}</p>
-              <p className="mt-1 text-sm leading-relaxed text-mist">{t.event}</p>
-            </li>
+        <Reveal>
+          <h2 className="font-display uppercase tracking-tightest text-2xl md:text-4xl mb-10">
+            How every car is handled
+          </h2>
+        </Reveal>
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 mb-20">
+          {process.map((p, i) => (
+            <Reveal key={p.step} delay={i * 100}>
+              <div className="relative pl-5 border-l border-ember/30">
+                <span className="font-display text-ember/60 text-sm tracking-tightest">
+                  {p.step}
+                </span>
+                <h3 className="text-chrome font-bold text-lg mt-2 mb-3 tracking-tight">
+                  {p.title}
+                </h3>
+                <p className="text-mist text-sm leading-relaxed">{p.text}</p>
+              </div>
+            </Reveal>
           ))}
-        </ol>
-      </div>
+        </div>
 
-      {/* Stats */}
-      <div className="mt-20 grid grid-cols-2 gap-6 rounded-3xl border border-graphite bg-carbon p-10 lg:grid-cols-4">
-        {stats.map((st) => (
-          <div key={st.label} className="text-center">
-            <p className="font-display text-3xl tracking-tightest text-ember sm:text-4xl">
-              {st.value.toLocaleString()}
-              {st.suffix}
+        <Reveal>
+          <div className="rounded-3xl bg-carbon border border-white/5 p-10 text-center">
+            <h2 className="font-display uppercase tracking-tightest text-2xl md:text-3xl mb-4">
+              Come see the studio
+            </h2>
+            <p className="text-mist mb-8 max-w-xl mx-auto">
+              Drop by for a coffee and a walk-around quote — no booking needed
+              for inspections.
             </p>
-            <p className="mt-1 text-xs uppercase tracking-[0.24em] text-mist">{st.label}</p>
+            <Link
+              href="/contact"
+              className="inline-block bg-ember hover:bg-emberdim text-white font-bold rounded-full px-10 py-4 transition-colors"
+            >
+              Get directions & book
+            </Link>
           </div>
-        ))}
+        </Reveal>
       </div>
     </div>
   );
