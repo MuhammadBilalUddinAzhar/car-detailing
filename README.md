@@ -33,6 +33,12 @@ npm start
 
 ## The hero (`components/CinematicCarHero.tsx`)
 
+- **Shader intro on load:** the page opens with a WebGL ember/carbon
+  shader (`components/EmberShader.tsx`), the brand name letter-reveal,
+  and the car streaking across the screen — then the headline reveals
+  automatically. The first paint is never blank; scrolling takes over
+  only after the intro settles. (If the browser restores a mid-page
+  scroll position, the intro is skipped.)
 - Pinned scroll section (~7000px of scrub) built with GSAP ScrollTrigger.
 - The car image tilts with the mouse and has a mirror reflection over
   an ember "showroom floor".
@@ -40,10 +46,16 @@ npm start
   and label, CTA copy and links, and the car image path.
 - Respects `prefers-reduced-motion` (renders statically, no pinning).
 
-### Put in YOUR car image (important)
+### The hero image
 
-Replace `public/images/hero/car.png` (a generated placeholder) with a
-real photo of a detailed car:
+`public/images/hero/car.png` is an AI-generated illustration of a car
+receiving ceramic coating (glossy obsidian coupe, cyan coating sweep,
+hydrophobic droplets, 9H shield badge) on a transparent background —
+so the 3D fly-in, mouse tilt and mirror reflection all work out of the
+box. The editable vector source is at
+`public/images/hero/car-source.svg`.
+
+To swap in a real photo of a detailed car instead:
 
 - **Side profile**, PNG with a **transparent background** (cut it out
   with remove.bg or Photoshop) — that's what makes the reflection and

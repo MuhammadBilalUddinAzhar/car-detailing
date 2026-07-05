@@ -1,0 +1,217 @@
+<svg width="1400" height="560" viewBox="0 0 1400 560" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Body paint: deep obsidian with a hint of blue at the top -->
+    <linearGradient id="paint" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b3340"/>
+      <stop offset="0.35" stop-color="#171b22"/>
+      <stop offset="0.75" stop-color="#0b0d11"/>
+      <stop offset="1" stop-color="#06070a"/>
+    </linearGradient>
+    <!-- Shoulder-line specular streak -->
+    <linearGradient id="streak" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7fd8ff" stop-opacity="0"/>
+      <stop offset="0.45" stop-color="#bfeaff" stop-opacity="0.85"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="0.7" stop-color="#7fd8ff" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#7fd8ff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Ceramic gloss sweep across the coated half -->
+    <linearGradient id="coatSweep" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0" stop-color="#4fc3ff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#9fe0ff" stop-opacity="0.28"/>
+      <stop offset="0.62" stop-color="#e8f9ff" stop-opacity="0.5"/>
+      <stop offset="0.72" stop-color="#9fe0ff" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#4fc3ff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Glass -->
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9adcff" stop-opacity="0.85"/>
+      <stop offset="0.5" stop-color="#3a6f8f" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#10202c" stop-opacity="0.9"/>
+    </linearGradient>
+    <!-- Wheel rim -->
+    <radialGradient id="rim" cx="0.5" cy="0.45" r="0.6">
+      <stop offset="0" stop-color="#e8eaed"/>
+      <stop offset="0.55" stop-color="#8b929c"/>
+      <stop offset="0.8" stop-color="#3a3f47"/>
+      <stop offset="1" stop-color="#15171b"/>
+    </radialGradient>
+    <radialGradient id="tire" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.72" stop-color="#0a0b0d"/>
+      <stop offset="0.9" stop-color="#1c1f24"/>
+      <stop offset="1" stop-color="#06070a"/>
+    </radialGradient>
+    <!-- Coating liquid arc above roof -->
+    <linearGradient id="liquid" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4fc3ff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#aee8ff" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#4fc3ff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="droplet" cx="0.35" cy="0.3" r="0.75">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="0.4" stop-color="#aee8ff" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#2f9fdc" stop-opacity="0.55"/>
+    </radialGradient>
+    <radialGradient id="headlampGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#dff6ff" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#dff6ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="tailGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ff4d2e" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ff4d2e" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blurS" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="blurM" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+    <clipPath id="bodyClip">
+      <path d="M 248 402
+               C 240 380 242 352 262 340
+               C 300 318 352 310 398 306
+               C 448 268 512 236 596 228
+               C 686 220 770 232 838 262
+               C 906 292 946 306 1012 318
+               C 1090 332 1170 348 1224 366
+               C 1262 379 1282 392 1284 412
+               C 1286 430 1276 444 1252 448
+               L 1180 452
+               C 1178 396 1130 352 1068 352
+               C 1006 352 958 396 956 452
+               L 548 452
+               C 546 396 498 352 436 352
+               C 374 352 326 396 324 452
+               L 286 450
+               C 262 446 254 424 248 402 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- ===================== CAR BODY ===================== -->
+  <path d="M 248 402
+           C 240 380 242 352 262 340
+           C 300 318 352 310 398 306
+           C 448 268 512 236 596 228
+           C 686 220 770 232 838 262
+           C 906 292 946 306 1012 318
+           C 1090 332 1170 348 1224 366
+           C 1262 379 1282 392 1284 412
+           C 1286 430 1276 444 1252 448
+           L 1180 452
+           C 1178 396 1130 352 1068 352
+           C 1006 352 958 396 956 452
+           L 548 452
+           C 546 396 498 352 436 352
+           C 374 352 326 396 324 452
+           L 286 450
+           C 262 446 254 424 248 402 Z"
+        fill="url(#paint)"/>
+
+  <!-- Ceramic gloss sweep on the coated (front) half -->
+  <g clip-path="url(#bodyClip)">
+    <rect x="620" y="200" width="700" height="280" fill="url(#coatSweep)"/>
+    <!-- ambient blue sheen on roofline -->
+    <path d="M 560 236 C 660 222 760 232 840 262 L 830 286 C 756 258 668 248 576 258 Z"
+          fill="#8fd8ff" opacity="0.18" filter="url(#blurS)"/>
+  </g>
+
+  <!-- Greenhouse / glass -->
+  <path d="M 470 300 C 506 262 560 240 616 236 C 668 232 716 238 758 252
+           L 796 268 C 802 272 800 280 792 282
+           L 700 300 C 640 308 540 308 470 300 Z" fill="url(#glass)"/>
+  <!-- windshield divider -->
+  <path d="M 688 240 L 668 302" stroke="#0a0b0d" stroke-width="7"/>
+  <!-- glass specular -->
+  <path d="M 500 288 C 540 256 596 242 640 240 L 632 250 C 588 254 544 268 514 292 Z" fill="#dff6ff" opacity="0.5"/>
+
+  <!-- Shoulder specular streak (coating gloss line) -->
+  <path d="M 300 340 C 480 318 760 300 1230 372" stroke="url(#streak)" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M 300 348 C 480 326 760 308 1230 380" stroke="url(#streak)" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+  <!-- Door seams & handle -->
+  <path d="M 640 306 C 646 340 648 396 640 448" stroke="#04050700" stroke-width="0"/>
+  <path d="M 636 308 C 644 350 646 404 638 450" stroke="#000000" stroke-width="2.5" opacity="0.55" fill="none"/>
+  <path d="M 852 268 C 862 320 864 396 854 450" stroke="#000000" stroke-width="2.5" opacity="0.5" fill="none"/>
+  <rect x="742" y="330" width="64" height="9" rx="4.5" fill="#0a0b0d"/>
+  <rect x="742" y="330" width="64" height="3.5" rx="1.75" fill="#8b929c" opacity="0.7"/>
+
+  <!-- Side intake -->
+  <path d="M 880 372 L 946 362 L 950 402 L 888 410 Z" fill="#06070a"/>
+  <path d="M 884 376 L 942 367" stroke="#4fc3ff" stroke-width="2" opacity="0.5"/>
+
+  <!-- Rocker glow line -->
+  <path d="M 336 446 L 1174 446" stroke="#ff4d2e" stroke-width="2.5" opacity="0.35"/>
+
+  <!-- Headlamp -->
+  <path d="M 1216 372 C 1244 380 1262 388 1272 398 L 1268 410 C 1250 402 1226 394 1206 390 Z" fill="#dff6ff" opacity="0.95"/>
+  <ellipse cx="1244" cy="392" rx="42" ry="20" fill="url(#headlampGlow)" filter="url(#blurM)"/>
+
+  <!-- Taillight -->
+  <path d="M 254 356 C 264 350 280 346 296 344 L 292 366 C 278 366 264 366 256 370 Z" fill="#ff4d2e"/>
+  <ellipse cx="272" cy="356" rx="34" ry="16" fill="url(#tailGlow)" filter="url(#blurM)"/>
+
+  <!-- ===================== WHEELS ===================== -->
+  <g>
+    <circle cx="436" cy="452" r="78" fill="url(#tire)"/>
+    <circle cx="436" cy="452" r="50" fill="url(#rim)"/>
+    <g stroke="#1c1f24" stroke-width="9" stroke-linecap="round">
+      <path d="M 436 452 L 436 410"/><path d="M 436 452 L 476 439"/><path d="M 436 452 L 461 486"/>
+      <path d="M 436 452 L 411 486"/><path d="M 436 452 L 396 439"/>
+    </g>
+    <circle cx="436" cy="452" r="12" fill="#e8eaed"/>
+    <circle cx="436" cy="452" r="12" fill="none" stroke="#3a3f47" stroke-width="2"/>
+    <path d="M 400 424 A 46 46 0 0 1 468 420" stroke="#ff4d2e" stroke-width="5" fill="none" opacity="0.9"/>
+  </g>
+  <g>
+    <circle cx="1068" cy="452" r="78" fill="url(#tire)"/>
+    <circle cx="1068" cy="452" r="50" fill="url(#rim)"/>
+    <g stroke="#1c1f24" stroke-width="9" stroke-linecap="round">
+      <path d="M 1068 452 L 1068 410"/><path d="M 1068 452 L 1108 439"/><path d="M 1068 452 L 1093 486"/>
+      <path d="M 1068 452 L 1043 486"/><path d="M 1068 452 L 1028 439"/>
+    </g>
+    <circle cx="1068" cy="452" r="12" fill="#e8eaed"/>
+    <circle cx="1068" cy="452" r="12" fill="none" stroke="#3a3f47" stroke-width="2"/>
+    <path d="M 1032 424 A 46 46 0 0 1 1100 420" stroke="#ff4d2e" stroke-width="5" fill="none" opacity="0.9"/>
+  </g>
+
+  <!-- ===================== CERAMIC COATING FX ===================== -->
+  <!-- liquid coating arcs flowing over the roof/hood -->
+  <path d="M 560 196 C 700 168 860 196 980 250" stroke="url(#liquid)" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.9"/>
+  <path d="M 600 172 C 730 148 880 176 1000 228" stroke="url(#liquid)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 520 222 C 660 196 820 220 936 268" stroke="url(#liquid)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.45"/>
+
+  <!-- coating particles / shimmer -->
+  <g fill="#aee8ff">
+    <circle cx="640" cy="184" r="4" opacity="0.9"/>
+    <circle cx="732" cy="164" r="3" opacity="0.7"/>
+    <circle cx="828" cy="184" r="4.5" opacity="0.85"/>
+    <circle cx="912" cy="212" r="3" opacity="0.6"/>
+    <circle cx="968" cy="238" r="4" opacity="0.75"/>
+    <circle cx="576" cy="206" r="2.5" opacity="0.6"/>
+    <circle cx="1006" cy="266" r="2.5" opacity="0.55"/>
+  </g>
+  <!-- sparkle crosses -->
+  <g stroke="#e8f9ff" stroke-width="2.5" stroke-linecap="round">
+    <path d="M 700 150 v 22 M 689 161 h 22"/>
+    <path d="M 884 160 v 18 M 875 169 h 18" opacity="0.8"/>
+    <path d="M 990 208 v 14 M 983 215 h 14" opacity="0.7"/>
+  </g>
+
+  <!-- hydrophobic droplets beading on hood & roof -->
+  <ellipse cx="930" cy="300" rx="9" ry="6.5" fill="url(#droplet)"/>
+  <ellipse cx="978" cy="312" rx="6.5" ry="5" fill="url(#droplet)"/>
+  <ellipse cx="1040" cy="330" rx="8" ry="5.5" fill="url(#droplet)"/>
+  <ellipse cx="1108" cy="346" rx="6" ry="4.5" fill="url(#droplet)"/>
+  <ellipse cx="700 " cy="226" rx="7" ry="5" fill="url(#droplet)"/>
+  <ellipse cx="608" cy="234" rx="6" ry="4.5" fill="url(#droplet)"/>
+  <!-- droplet speculars -->
+  <g fill="#ffffff" opacity="0.9">
+    <ellipse cx="927" cy="298" rx="2.6" ry="1.7"/>
+    <ellipse cx="976" cy="310" rx="1.8" ry="1.2"/>
+    <ellipse cx="1037" cy="328" rx="2.2" ry="1.4"/>
+    <ellipse cx="698" cy="224" rx="2" ry="1.3"/>
+  </g>
+
+  <!-- 9H shield badge floating by the fender -->
+  <g transform="translate(1176, 300)">
+    <path d="M 0 -26 L 22 -16 L 22 6 C 22 20 12 30 0 34 C -12 30 -22 20 -22 6 L -22 -16 Z"
+          fill="#0e1218" stroke="#4fc3ff" stroke-width="2.5" opacity="0.95"/>
+    <text x="0" y="10" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#aee8ff">9H</text>
+  </g>
+</svg>

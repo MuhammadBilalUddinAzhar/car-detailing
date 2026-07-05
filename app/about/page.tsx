@@ -1,86 +1,66 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Reveal from '@/components/Reveal';
-import { process, stats } from '@/lib/data';
+import { stats, process, site } from '@/lib/data';
 
 export const metadata: Metadata = {
   title: 'About — Auto Extreme',
-  description: 'The studio, the standards and the people behind Auto Extreme.',
+  description: 'The studio, the people and the obsession behind Auto Extreme.',
 };
 
 export default function AboutPage() {
   return (
-    <div className="pt-28 pb-24 bg-ink min-h-screen">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <Reveal>
-          <p className="text-ember text-xs font-bold uppercase tracking-[0.25em] mb-3">
-            About
+    <main className="mx-auto max-w-7xl px-5 pb-24 pt-32 md:px-8">
+      <p className="eyebrow">About</p>
+      <h1 className="mt-3 max-w-3xl font-display text-4xl tracking-tightest text-chrome md:text-6xl">
+        A studio, not a car wash.
+      </h1>
+
+      <div className="mt-12 grid gap-12 md:grid-cols-2">
+        <div className="space-y-5 leading-relaxed text-mist">
+          <p>
+            {site.name} started in a single garage bay with one polisher, one paint gauge and a rule we still keep: never hand back a car we would not park in our own driveway.
           </p>
-          <h1 className="font-display uppercase tracking-tightest text-4xl md:text-6xl mb-6 max-w-3xl">
-            Built by people who wash their own wheels twice.
-          </h1>
-          <p className="text-mist text-lg leading-relaxed max-w-2xl mb-16">
-            Auto Extreme started in a single garage bay with a paint depth
-            gauge, a rotary polisher and an unhealthy relationship with
-            cross-hatch lighting. Today it’s a dedicated studio — same
-            standards, better lighting.
+          <p>
+            Today we run a climate-controlled studio with color-corrected inspection lighting, dedicated coating rooms and a plotter for blade-free PPF cutting. Every technician is trained in-house and every car is photographed before, during and after.
           </p>
-        </Reveal>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
-          {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 100}>
-              <div className="rounded-2xl bg-carbon border border-white/5 p-6 text-center">
-                <p className="font-display text-3xl text-ember tracking-tightest mb-1">
-                  {s.value}
-                </p>
-                <p className="text-mist text-xs uppercase tracking-wider">
-                  {s.label}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+          <p>
+            We work on daily drivers as seriously as we work on supercars — because the owner who saved for their first car cares just as much as the one collecting their fifth.
+          </p>
         </div>
-
-        <Reveal>
-          <h2 className="font-display uppercase tracking-tightest text-2xl md:text-4xl mb-10">
-            How every car is handled
-          </h2>
-        </Reveal>
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 mb-20">
-          {process.map((p, i) => (
-            <Reveal key={p.step} delay={i * 100}>
-              <div className="relative pl-5 border-l border-ember/30">
-                <span className="font-display text-ember/60 text-sm tracking-tightest">
-                  {p.step}
-                </span>
-                <h3 className="text-chrome font-bold text-lg mt-2 mb-3 tracking-tight">
-                  {p.title}
-                </h3>
-                <p className="text-mist text-sm leading-relaxed">{p.text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal>
-          <div className="rounded-3xl bg-carbon border border-white/5 p-10 text-center">
-            <h2 className="font-display uppercase tracking-tightest text-2xl md:text-3xl mb-4">
-              Come see the studio
-            </h2>
-            <p className="text-mist mb-8 max-w-xl mx-auto">
-              Drop by for a coffee and a walk-around quote — no booking needed
-              for inspections.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-block bg-ember hover:bg-emberdim text-white font-bold rounded-full px-10 py-4 transition-colors"
-            >
-              Get directions & book
-            </Link>
-          </div>
-        </Reveal>
+        <div className="img-placeholder aspect-[4/3]" aria-hidden />
       </div>
-    </div>
+
+      <div className="mt-20 grid grid-cols-2 gap-8 rounded-3xl border border-white/5 bg-carbon p-10 md:grid-cols-4">
+        {stats.map((s) => (
+          <div key={s.label} className="text-center">
+            <p className="font-display text-3xl tracking-tightest text-chrome">{s.value}</p>
+            <p className="mt-1 text-xs font-semibold uppercase tracking-[0.25em] text-mist">{s.label}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-20">
+        <p className="eyebrow">How we work</p>
+        <h2 className="mt-3 font-display text-3xl tracking-tightest text-chrome md:text-4xl">The four-stage method.</h2>
+        <div className="mt-10 grid gap-10 md:grid-cols-4">
+          {process.map((p) => (
+            <div key={p.step}>
+              <p className="font-display text-4xl text-ember/80">{p.step}</p>
+              <h3 className="mt-4 font-display text-lg text-chrome">{p.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-mist">{p.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-20 text-center">
+        <Link
+          href="/contact"
+          className="inline-block rounded-full bg-ember px-9 py-4 font-semibold text-ink transition-colors hover:bg-emberdim hover:text-chrome"
+        >
+          Visit the studio
+        </Link>
+      </div>
+    </main>
   );
 }

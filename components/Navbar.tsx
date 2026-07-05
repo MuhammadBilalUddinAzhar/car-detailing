@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { site } from '@/lib/data';
 
 const links = [
@@ -10,114 +10,70 @@ const links = [
   { href: '/services', label: 'Services' },
   { href: '/gallery', label: 'Gallery' },
   { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  useEffect(() => setOpen(false), [pathname]);
-
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-[100] transition-all duration-500 ${
-        scrolled || open
-          ? 'bg-ink/80 backdrop-blur-xl border-b border-white/5'
-          : 'bg-transparent border-b border-transparent'
-      }`}
-    >
-      <nav className="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
-        <Link
-          href="/"
-          className="font-display uppercase tracking-tightest text-lg text-chrome"
-        >
-          Auto<span className="text-ember">Extreme</span>
+    <header className="fixed inset-x-0 top-0 z-[100] border-b border-white/5 bg-ink/70 backdrop-blur-md">
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-8">
+        <Link href="/" className="font-display text-lg tracking-tightest text-chrome">
+          AUTO<span className="text-ember">EXTREME</span>
         </Link>
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-8">
+        <div className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                className={`text-sm font-medium transition-colors ${
-                  pathname === l.href
-                    ? 'text-ember'
-                    : 'text-mist hover:text-chrome'
-                }`}
-              >
-                {l.label}
-              </Link>
-            </li>
-          ))}
-          <li>
-            <a
-              href={`tel:${site.phone.replace(/[^+\d]/g, '')}`}
-              className="text-sm font-bold text-ink bg-chrome hover:bg-white rounded-full px-5 py-2 transition-colors"
+            <Link
+              key={l.href}
+              href={l.href}
+              className={`text-sm font-medium transition-colors hover:text-chrome ${
+                pathname === l.href ? 'text-chrome' : 'text-mist'
+              }`}
             >
-              Book now
-            </a>
-          </li>
-        </ul>
+              {l.label}
+            </Link>
+          ))}
+          <Link
+            href="/contact"
+            className="rounded-full bg-ember px-5 py-2 text-sm font-semibold text-ink transition-colors hover:bg-emberdim hover:text-chrome"
+          >
+            Book now
+          </Link>
+        </div>
 
-        {/* Mobile toggle */}
         <button
+          aria-label="Toggle menu"
           onClick={() => setOpen((v) => !v)}
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-          className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-[5px]"
+          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
         >
-          <span
-            className={`block w-6 h-[2px] bg-chrome transition-transform ${
-              open ? 'translate-y-[7px] rotate-45' : ''
-            }`}
-          />
-          <span
-            className={`block w-6 h-[2px] bg-chrome transition-opacity ${
-              open ? 'opacity-0' : ''
-            }`}
-          />
-          <span
-            className={`block w-6 h-[2px] bg-chrome transition-transform ${
-              open ? '-translate-y-[7px] -rotate-45' : ''
-            }`}
-          />
+          <span className={`h-0.5 w-6 bg-chrome transition-transform ${open ? 'translate-y-2 rotate-45' : ''}`} />
+          <span className={`h-0.5 w-6 bg-chrome transition-opacity ${open ? 'opacity-0' : ''}`} />
+          <span className={`h-0.5 w-6 bg-chrome transition-transform ${open ? '-translate-y-2 -rotate-45' : ''}`} />
         </button>
       </nav>
 
-      {/* Mobile menu */}
       {open && (
-        <ul className="md:hidden px-5 pb-6 pt-2 space-y-1 bg-ink/95 backdrop-blur-xl">
+        <div className="border-t border-white/5 bg-ink/95 px-5 pb-6 pt-2 md:hidden">
           {links.map((l) => (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                className={`block py-3 text-base font-semibold border-b border-white/5 ${
-                  pathname === l.href ? 'text-ember' : 'text-chrome'
-                }`}
-              >
-                {l.label}
-              </Link>
-            </li>
-          ))}
-          <li className="pt-3">
-            <a
-              href={`tel:${site.phone.replace(/[^+\d]/g, '')}`}
-              className="block text-center font-bold text-ink bg-chrome rounded-full px-5 py-3"
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="block py-3 text-base text-mist hover:text-chrome"
             >
-              Book now
-            </a>
-          </li>
-        </ul>
+              {l.label}
+            </Link>
+          ))}
+          <Link
+            href="/contact"
+            onClick={() => setOpen(false)}
+            className="mt-2 block rounded-full bg-ember px-5 py-3 text-center font-semibold text-ink"
+          >
+            Book now · {site.phone}
+          </Link>
+        </div>
       )}
     </header>
   );

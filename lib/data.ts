@@ -1,189 +1,192 @@
-// lib/data.ts
-// ---------------------------------------------------------------
-// ALL site content lives here. Replace the placeholder copy,
-// prices, phone numbers and image paths with your real content.
-// ---------------------------------------------------------------
+// ─────────────────────────────────────────────────────────────
+// ALL site content lives here. Replace placeholder copy, prices,
+// phone numbers and image paths with your real business content.
+// ─────────────────────────────────────────────────────────────
 
 export const site = {
   name: 'Auto Extreme',
-  tagline: 'Detailing studio',
-  phone: '+1 (555) 012-3456',
-  whatsapp: '15550123456', // digits only, country code first
-  email: 'bookings@autoextreme.example',
-  address: '42 Piston Lane, Motor City',
-  hours: 'Mon–Sat · 9:00–18:00',
+  tagline: 'Cinematic-grade car detailing',
+  phone: '+91 98765 43210',
+  // Digits only, country code first — powers the WhatsApp booking form.
+  whatsapp: '919876543210',
+  email: 'book@autoextreme.in',
+  address: 'Unit 7, Chrome Park Industrial Estate, Bengaluru 560001',
+  hours: 'Mon–Sat · 9:00 AM – 8:00 PM',
   instagram: 'https://instagram.com/autoextreme',
-  facebook: 'https://facebook.com/autoextreme',
+  youtube: 'https://youtube.com/@autoextreme',
+};
+
+export const heroContent = {
+  taglineTop: 'OBSESSED WITH',
+  taglineBottom: 'THE FINISH',
+  cardKicker: 'AUTO EXTREME STUDIO',
+  cardTitle: 'Where paint becomes glass.',
+  metricValue: 1287,
+  metricLabel: 'Cars Perfected',
+  badges: ['9H Ceramic', 'Paint Correction', 'PPF Certified', 'Showroom Interior'],
+  ctaPrimary: { label: 'Book a slot', href: '/contact' },
+  ctaSecondary: { label: 'See the work', href: '/gallery' },
+  carImageSrc: '/images/hero/car.png',
 };
 
 export type Service = {
   slug: string;
   title: string;
+  tagline: string;
+  description: string;
   price: string;
   duration: string;
-  blurb: string;
-  bullets: string[];
+  features: string[];
   image: string;
 };
 
 export const services: Service[] = [
   {
     slug: 'ceramic-coating',
-    title: '9H Ceramic Coating',
-    price: 'from $699',
+    title: 'Ceramic Coating',
+    tagline: 'A 9H glass shield with years of gloss.',
+    description:
+      'Multi-layer SiO₂ ceramic coating bonded to fully corrected paint. Hydrophobic, chemical-resistant and deeper than any wax could ever look.',
+    price: 'from ₹24,999',
     duration: '2–3 days',
-    blurb:
-      'A measured, multi-layer 9H ceramic shield bonded to fully corrected paint. Years of gloss, chemical resistance and effortless washing.',
-    bullets: [
-      'Full decontamination & clay bar',
-      'Single-stage paint correction included',
-      '2 layers of 9H coating + top coat',
-      '5-year protection warranty',
+    features: [
+      'Full decontamination + single-stage correction included',
+      '2–4 layers of 9H SiO₂ coating',
+      'Wheels, glass and trim coated',
+      '5-year maintenance-backed warranty',
     ],
-    image: '/images/ceramic.jpg',
+    image: '/images/services/ceramic-coating.jpg',
   },
   {
     slug: 'paint-correction',
     title: 'Paint Correction',
-    price: 'from $449',
+    tagline: 'Swirls, holograms and scratches — machined away.',
+    description:
+      'Measured, multi-stage machine polishing that removes defects instead of hiding them. Finished under color-corrected inspection lighting.',
+    price: 'from ₹12,999',
     duration: '1–2 days',
-    blurb:
-      'Machine polishing in up to three stages to remove swirls, holograms and light scratches — measured with a gloss meter before and after.',
-    bullets: [
-      'Paint depth reading on every panel',
-      '1–3 stage machine polish',
-      'Swirl & hologram removal',
-      'Finished with carnauba or sealant',
+    features: [
+      'Paint depth measured panel by panel',
+      '1, 2 or 3-stage correction options',
+      'Swirl, scratch and hologram removal',
+      'Finished with gloss-enhancing sealant',
     ],
-    image: '/images/correction.jpg',
-  },
-  {
-    slug: 'interior-detail',
-    title: 'Interior Deep Detail',
-    price: 'from $249',
-    duration: '4–6 hours',
-    blurb:
-      'Every surface inside the cabin — steam-cleaned, extracted, conditioned and protected. Leather, fabric, trim and glass.',
-    bullets: [
-      'Hot-water extraction of seats & carpet',
-      'Leather clean + conditioner',
-      'Steam sanitation of touchpoints',
-      'Interior glass & trim dressing',
-    ],
-    image: '/images/interior.jpg',
-  },
-  {
-    slug: 'full-detail',
-    title: 'Signature Full Detail',
-    price: 'from $549',
-    duration: '1 day',
-    blurb:
-      'Our most-booked package: the complete exterior and interior treatment that brings a daily driver back to delivery-day condition.',
-    bullets: [
-      'Foam wash & full decontamination',
-      'One-step gloss enhancement polish',
-      'Complete interior deep detail',
-      'Wheels, arches & engine bay',
-    ],
-    image: '/images/full.jpg',
+    image: '/images/services/paint-correction.jpg',
   },
   {
     slug: 'ppf',
     title: 'Paint Protection Film',
-    price: 'from $1,499',
+    tagline: 'Self-healing armor for stone chips and scuffs.',
+    description:
+      'Precision plotter-cut TPU film with self-healing top coat. Full-body wraps or high-impact zones — invisible once installed.',
+    price: 'from ₹49,999',
     duration: '3–5 days',
-    blurb:
-      'Self-healing urethane film, precision cut for your exact model. Invisible armour for high-impact zones or the whole car.',
-    bullets: [
-      'Computer-cut, model-specific patterns',
-      'Self-healing top coat',
-      'Front-end, track pack or full body',
-      '10-year film warranty',
+    features: [
+      'Plotter-cut patterns, no blades near your paint',
+      'Self-healing gloss or stealth matte finishes',
+      'Full body, front kit or track pack coverage',
+      '10-year film manufacturer warranty',
     ],
-    image: '/images/ppf.jpg',
+    image: '/images/services/ppf.jpg',
+  },
+  {
+    slug: 'interior-detailing',
+    title: 'Interior Detailing',
+    tagline: 'Factory-fresh cabins, down to the stitching.',
+    description:
+      'Deep extraction of carpets and seats, steam sanitation, leather feeding and UV protection on every surface you touch.',
+    price: 'from ₹6,999',
+    duration: '4–6 hours',
+    features: [
+      'Hot-water extraction of fabric and carpets',
+      'Leather cleaned, fed and UV-protected',
+      'Steam sanitation of vents and touchpoints',
+      'Odour neutralisation, not masking',
+    ],
+    image: '/images/services/interior.jpg',
+  },
+  {
+    slug: 'full-detail',
+    title: 'Signature Full Detail',
+    tagline: 'The complete Auto Extreme treatment, inside-out.',
+    description:
+      'Our flagship package: exterior decontamination and enhancement polish, full interior deep clean, engine bay dressing and glass polishing.',
+    price: 'from ₹15,999',
+    duration: '1 day',
+    features: [
+      'Foam wash, clay bar and iron decontamination',
+      'Single-stage enhancement machine polish',
+      'Complete interior deep clean',
+      'Engine bay cleaned and dressed',
+    ],
+    image: '/images/services/full-detail.jpg',
   },
   {
     slug: 'maintenance-wash',
     title: 'Maintenance Wash',
-    price: 'from $89',
-    duration: '90 min',
-    blurb:
-      'The safe, two-bucket, coating-friendly wash that keeps protected cars perfect between details. Members save 20%.',
-    bullets: [
-      'pH-neutral foam pre-wash',
-      'Two-bucket contact wash',
-      'Coating top-up spray sealant',
-      'Wheels, glass & tyre dressing',
+    tagline: 'Coating-safe washes that keep the shine alive.',
+    description:
+      'Two-bucket, pH-neutral maintenance washes designed for coated and filmed cars. Keeps your warranty valid and your gloss deep.',
+    price: 'from ₹1,499',
+    duration: '90 minutes',
+    features: [
+      'pH-neutral foam and two-bucket method',
+      'Coating topper applied every visit',
+      'Wheels and barrels detailed',
+      'Interior wipe-down and vacuum',
     ],
-    image: '/images/wash.jpg',
+    image: '/images/services/maintenance.jpg',
   },
 ];
 
 export type GalleryItem = {
   id: number;
   title: string;
-  category: 'Ceramic' | 'Correction' | 'Interior' | 'PPF';
+  category: 'Ceramic' | 'Correction' | 'PPF' | 'Interior';
+  car: string;
   image: string;
 };
 
 export const gallery: GalleryItem[] = [
-  { id: 1, title: 'GT3 — full front PPF', category: 'PPF', image: '/images/gallery-1.jpg' },
-  { id: 2, title: 'M4 — 2-stage correction', category: 'Correction', image: '/images/gallery-2.jpg' },
-  { id: 3, title: 'Range Rover — interior revival', category: 'Interior', image: '/images/gallery-3.jpg' },
-  { id: 4, title: 'Model S — 9H ceramic', category: 'Ceramic', image: '/images/gallery-4.jpg' },
-  { id: 5, title: '911 Turbo — show prep', category: 'Correction', image: '/images/gallery-5.jpg' },
-  { id: 6, title: 'Defender — ceramic + PPF', category: 'Ceramic', image: '/images/gallery-6.jpg' },
-  { id: 7, title: 'RS6 — track pack film', category: 'PPF', image: '/images/gallery-7.jpg' },
-  { id: 8, title: 'S-Class — leather restoration', category: 'Interior', image: '/images/gallery-8.jpg' },
+  { id: 1, title: 'Midnight gloss, 3 layers deep', category: 'Ceramic', car: 'BMW M4 Competition', image: '/images/gallery/m4.jpg' },
+  { id: 2, title: 'Ten years of swirls, gone', category: 'Correction', car: 'Porsche 911 Carrera', image: '/images/gallery/911.jpg' },
+  { id: 3, title: 'Full-body stealth PPF', category: 'PPF', car: 'Lamborghini Huracán', image: '/images/gallery/huracan.jpg' },
+  { id: 4, title: 'Nappa leather revival', category: 'Interior', car: 'Mercedes S-Class', image: '/images/gallery/sclass.jpg' },
+  { id: 5, title: 'Track pack + ceramic topper', category: 'PPF', car: 'Toyota GR Supra', image: '/images/gallery/supra.jpg' },
+  { id: 6, title: 'Daily driver, showroom deep', category: 'Ceramic', car: 'Hyundai Creta', image: '/images/gallery/creta.jpg' },
+  { id: 7, title: 'Two-stage mirror finish', category: 'Correction', car: 'Audi RS5', image: '/images/gallery/rs5.jpg' },
+  { id: 8, title: 'Family SUV, factory-fresh cabin', category: 'Interior', car: 'Toyota Fortuner', image: '/images/gallery/fortuner.jpg' },
+  { id: 9, title: 'High-impact front kit', category: 'PPF', car: 'Kia Seltos', image: '/images/gallery/seltos.jpg' },
 ];
 
 export const stats = [
-  { value: '500+', label: 'Cars perfected' },
+  { value: '1,287+', label: 'Cars perfected' },
   { value: '9H', label: 'Ceramic hardness' },
   { value: '5 yr', label: 'Coating warranty' },
-  { value: '4.9★', label: 'Average rating' },
+  { value: '4.9★', label: 'Google rating' },
 ];
 
 export const process = [
-  {
-    step: '01',
-    title: 'Inspect & measure',
-    text: 'Paint depth readings and defect mapping on every panel before a single pad touches the car.',
-  },
-  {
-    step: '02',
-    title: 'Decontaminate',
-    text: 'Foam, iron fallout remover and clay leave the surface chemically and physically clean.',
-  },
-  {
-    step: '03',
-    title: 'Correct',
-    text: 'Machine polishing in controlled stages, checked under cross-hatch lighting as we go.',
-  },
-  {
-    step: '04',
-    title: 'Protect & hand over',
-    text: 'Ceramic, film or sealant is applied and cured — then you get a full aftercare walkthrough.',
-  },
+  { step: '01', title: 'Inspect', text: 'Paint depth readings and defect mapping under studio lighting before we quote anything.' },
+  { step: '02', title: 'Decontaminate', text: 'Foam, clay and iron removal strip everything the road has bonded to your paint.' },
+  { step: '03', title: 'Correct', text: 'Machine polishing removes defects permanently — we never fill or hide them.' },
+  { step: '04', title: 'Protect', text: 'Ceramic or film locks in the finish. You leave with aftercare, not just an invoice.' },
 ];
 
 export const testimonials = [
   {
-    quote:
-      'The paint on my five-year-old M3 looks deeper than the day I collected it. Obsessive is the right word.',
-    name: 'Daniel R.',
-    car: 'BMW M3 Competition',
+    quote: 'The M4 looks deeper in color than the day it left the showroom. Rain just slides off.',
+    name: 'Arjun R.',
+    car: 'BMW M4 · Ceramic Coating',
   },
   {
-    quote:
-      'Booked a maintenance wash, got a masterclass in how a car should be handled. Nobody else touches it now.',
+    quote: 'They showed me the paint gauge readings before touching a panel. That level of care is rare.',
     name: 'Priya S.',
-    car: 'Porsche Macan GTS',
+    car: 'Porsche 911 · Paint Correction',
   },
   {
-    quote:
-      'Ceramic coating done two years ago and it still beads like day one. Worth every cent.',
-    name: 'Marcus T.',
-    car: 'Tesla Model 3 Performance',
+    quote: 'Stealth PPF turned my Huracán matte and bulletproof. Flawless edges, invisible seams.',
+    name: 'Karan M.',
+    car: 'Lamborghini Huracán · Full PPF',
   },
 ];
